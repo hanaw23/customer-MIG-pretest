@@ -27,7 +27,7 @@ export default function index() {
         <div className="flex justify-end mr-16">
           <AddButton titleButton="Add Customer" setOpen={handleOpenAdd} />
         </div>
-        {/* <CustomerTable /> */}
+        <CustomerTable />
       </div>
       <CustomerDrawer isOpen={openAdd} title="Add" onClose={handleCloseAdd} />
     </div>

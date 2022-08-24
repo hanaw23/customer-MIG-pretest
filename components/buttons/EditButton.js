@@ -31,7 +31,7 @@ export default function EditButton(props) {
           <EditIcon />
         </button>
       </div>
-      {openEditModal ? switchModalCase() : null}
+      {openEdit ? switchModalCase() : null}
     </>
   );
 }
