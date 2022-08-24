@@ -14,7 +14,6 @@ export default function index() {
 
   const handleCloseAdd = () => {
     setOpenAdd(!openAdd);
-    window.location.reload(true);
   };
 
   return (
