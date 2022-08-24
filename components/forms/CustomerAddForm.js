@@ -112,7 +112,7 @@ export default function CustomerAddForm(props) {
         </div>
 
         <div>
-          <div className="flex gap-8 mt-4 justify-center">
+          <div className="flex gap-8 mt-14 justify-center">
             <button className="border border-transparent bg-indigo-500 text-sm w-[255px] h-12 rounded-[10px] text-white font-bold" type="submit">
               Submit
             </button>

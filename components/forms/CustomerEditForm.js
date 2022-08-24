@@ -7,7 +7,7 @@ export default function CustomerEditForm(props) {
   const [country, setCountry] = useState(props.country);
   const [phone, setPhone] = useState(props.phone);
   const [job, setJob] = useState(props.job);
-  const [statusCus, setStatusCus] = useState("");
+  const [statusCus, setStatusCus] = useState(`${props.status}`);
 
   // const customerId = props.customerId;
 
@@ -105,7 +105,7 @@ export default function CustomerEditForm(props) {
             instanceId="selectbox"
             options={status}
             onChange={handleChangeStatus}
-            defaultInputValue={props.status}
+            defaultInputValue={statusCus}
             className="text-gray-700 w-[320px] h-10 mt-2 focus:outline-blue-500 "
             placeholder="Select Status"
             isClearable
@@ -115,7 +115,7 @@ export default function CustomerEditForm(props) {
         </div>
 
         <div>
-          <div className="flex gap-8 mt-4 justify-center">
+          <div className="flex gap-8 mt-14 justify-center">
             <button className="border border-transparent bg-indigo-500 text-sm w-[255px] h-12 rounded-[10px] text-white font-bold" type="submit">
               Submit
             </button>
