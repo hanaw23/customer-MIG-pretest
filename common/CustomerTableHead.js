@@ -1,4 +1,5 @@
 import EditButton from "../components/buttons/EditButton";
+import DeleteButton from "../components/buttons/DeleteButton";
 
 export const customerHead = [
   {
@@ -40,7 +41,7 @@ export const customerHead = [
     cell: (row) => (
       <div className="flex gap-6" key={row.id}>
         <EditButton customerId={row.id} name={row.name} status={row.status} address={row.address} country={row.country} phone={row.phone_number} job={row.job_title} title="Customer" />
-        {/* <DeleteButton productId={row.product_id} productName={row.name} title="Product" /> */}
+        <DeleteButton customerId={row.id} name={row.name} title="Customer" />
       </div>
     ),
   },
