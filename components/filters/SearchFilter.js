@@ -6,7 +6,7 @@ export default function SearchFilter(props) {
       <div className="absolute inset-y-0 left-0 flex items-center pl-3">
         <SearchIcon />
       </div>
-      <input type="text" placeholder="Search" className="border rounded-[5px] border-gray-300 w-[350px] h-10 px-10 focus:outline-blue-500 text-sm " value={props.filterValue} onChange={props.filterChange} />
+      <input type="text" placeholder="Search" className="border rounded-[5px] border-gray-300 w-[350px] h-10 px-10 focus:outline-indigo-500 text-sm " value={props.filterValue} onChange={props.filterChange} />
     </div>
   );
 }

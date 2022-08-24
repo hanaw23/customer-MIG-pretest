@@ -18,11 +18,10 @@ export default function index() {
 
   return (
     <div className="z-0">
-      <div className="flex justify-between h-14" />
       <div>
-        <h1 className=" font-semibold text-[30px] text-gray-600 ml-20 -mt-[40px]">Customer Management</h1>
+        <h1 className=" font-semibold text-[30px] text-gray-600 ml-20 mt-16">Customer Management</h1>
       </div>
-      <div className=" ml-[80px] mt-10 mx-center">
+      <div className=" ml-[80px] mt-6 mx-center">
         <div className="flex justify-end mr-16">
           <AddButton titleButton="Add Customer" setOpen={handleOpenAdd} />
         </div>

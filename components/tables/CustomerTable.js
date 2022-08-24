@@ -28,7 +28,7 @@ export default function CustomerTable() {
   return (
     <>
       <SearchFilter filterValue={query} filterChange={(e) => setQuery(e.target.value)} />
-      <div className="block min-w-full shadow rounded-lg overflow-x-auto whitespace-nowrap -ml-4 py-3 w-80 mt-6 xl:text-base 2xl:text-base text-sm">
+      <div className="block w-full shadow rounded-lg overflow-x-auto whitespace-nowrap -ml-4 py-3  mt-6 text-sm">
         <DataTable columns={customerHead} data={handleData(customer)} pagination progressPending={pending} progressComponent={<SpinnerLoading />} highlightOnHovers defaultSortField="name" />
       </div>
     </>
