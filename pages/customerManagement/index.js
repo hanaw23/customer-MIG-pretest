@@ -19,7 +19,7 @@ export default function index() {
   return (
     <div className="z-0">
       <div>
-        <h1 className=" font-semibold text-[30px] text-gray-600 ml-20 mt-16">Customer Management</h1>
+        <h1 className=" font-semibold text-[30px] text-gray-600 ml-20 mt-10">Customer Management</h1>
       </div>
       <div className=" ml-[80px] mt-6 mx-center">
         <div className="flex justify-end mr-16">
