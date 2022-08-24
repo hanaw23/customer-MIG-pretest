@@ -4,6 +4,7 @@ import { useState } from "react";
 import AddButton from "../../components/buttons/AddButton";
 import CustomerDrawer from "../../components/drawers/customerDrawer";
 import CustomerTable from "../../components/tables/CustomerTable";
+import ScrollProgress from "../../components/scrolls/ScollProgress";
 
 export default function index() {
   const [openAdd, setOpenAdd] = useState(false);
@@ -17,17 +18,20 @@ export default function index() {
   };
 
   return (
-    <div className="z-0">
+    <div>
+      <ScrollProgress />
+
       <div>
-        <h1 className=" font-semibold text-[30px] text-gray-600 ml-20 mt-10">Customer Management</h1>
-      </div>
-      <div className=" ml-[80px] mt-6 mx-center">
-        <div className="flex justify-end mr-16">
-          <AddButton titleButton="Add Customer" setOpen={handleOpenAdd} />
+        <h1 className=" font-semibold text-[30px] text-gray-600 ml-20 mt-0 py-10">Customer Management</h1>
+
+        <div className=" ml-[80px] mt-6 mx-center">
+          <div className="flex justify-end mr-16">
+            <AddButton titleButton="Add Customer" setOpen={handleOpenAdd} />
+          </div>
+          <CustomerTable />
         </div>
-        <CustomerTable />
+        <CustomerDrawer isOpen={openAdd} title="Add" onClose={handleCloseAdd} />
       </div>
-      <CustomerDrawer isOpen={openAdd} title="Add" onClose={handleCloseAdd} />
     </div>
   );
 }
