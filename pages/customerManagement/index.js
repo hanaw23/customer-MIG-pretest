@@ -5,6 +5,7 @@ import AddButton from "../../components/buttons/AddButton";
 import CustomerDrawer from "../../components/drawers/customerDrawer";
 import CustomerTable from "../../components/tables/CustomerTable";
 import ScrollProgress from "../../components/scrolls/ScollProgress";
+import PageHead from "../../components/headers/PageHead";
 
 export default function index() {
   const [openAdd, setOpenAdd] = useState(false);
@@ -22,12 +23,10 @@ export default function index() {
       <ScrollProgress />
 
       <div>
-        <h1 className=" font-semibold text-[30px] text-gray-600 ml-20 mt-0 py-10">Customer Management</h1>
+        <PageHead namePage="Customer Management" setOpen={handleOpenAdd} />
 
-        <div className=" ml-[80px] mt-6 mx-center">
-          <div className="flex justify-end mr-16">
-            <AddButton titleButton="Add Customer" setOpen={handleOpenAdd} />
-          </div>
+        <div className=" ml-[80px] mt-8 mx-center">
+          <div className="flex justify-end mr-16"></div>
           <CustomerTable />
         </div>
         <CustomerDrawer isOpen={openAdd} title="Add" onClose={handleCloseAdd} />
