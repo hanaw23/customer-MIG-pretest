@@ -29,40 +29,27 @@ export default function CustomerEditForm(props) {
 
   const handleChangeName = (event) => {
     setName(event.target.value);
-    // setEmpty("");
   };
 
   const handleChangeAddress = (event) => {
     setAddress(event.target.value);
-    // setEmpty("");
   };
 
   const handleChangeCountry = (event) => {
     setCountry(event.target.value);
-    // setEmpty("");
   };
 
   const handleChangePhone = (event) => {
     setPhone(event.target.value);
-    // setEmpty("");
   };
 
   const handleChangeJob = (event) => {
     setJob(event.target.value);
-    // setEmpty("");
   };
 
   const handleChangeStatus = (event) => {
     setStatusCus(event.value);
-    // setEmpty("");
   };
-
-  //   const colourStyles = {
-  //     control: (base) => ({
-  //       ...base,
-  //       border: empty ? '1px solid red' : null,
-  //     }),
-  //   };
 
   const submitEditCustomer = async (event) => {
     event.preventDefault();
@@ -78,8 +65,6 @@ export default function CustomerEditForm(props) {
       status: JSON.parse(statusCus),
     });
 
-    // console.log(result.data);
-
     try {
       if (result.data.success) {
         router.push("/customerManagement");
@@ -88,8 +73,6 @@ export default function CustomerEditForm(props) {
       }
     } catch (error) {
       setFailed(error);
-
-      // setEmpty("Please fill the form");
     }
   };
 
@@ -101,7 +84,6 @@ export default function CustomerEditForm(props) {
             Customer Name
           </label>
           <input id="name" className={`text-gray-700 px-3 border rounded w-[320px] h-10 mt-2 focus:outline-blue-500 border-gray-300`} placeholder="Input Customer Name" value={name} onChange={handleChangeName} />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div className="mt-4 flex flex-col">
@@ -109,7 +91,6 @@ export default function CustomerEditForm(props) {
             Customer Address
           </label>
           <input id="address" className={`text-gray-700 px-3 border rounded w-[320px] h-10 mt-2 focus:outline-blue-500 border-gray-300`} placeholder="Input Customer Address" value={address} onChange={handleChangeAddress} />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div className="mt-4 flex flex-col">
@@ -117,7 +98,6 @@ export default function CustomerEditForm(props) {
             Country
           </label>
           <input id="country" className={`text-gray-700 px-3 border rounded w-[320px] h-10 mt-2 focus:outline-blue-500 border-gray-300`} placeholder="Input Customer country" value={country} onChange={handleChangeCountry} />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div className="mt-4 flex flex-col">
@@ -125,7 +105,6 @@ export default function CustomerEditForm(props) {
             Phone Number
           </label>
           <input id="phone" className={`text-gray-700 px-3 border rounded w-[320px] h-10 mt-2 focus:outline-blue-500 border-gray-300`} placeholder="Input Phone Number" value={phone} onChange={handleChangePhone} />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div className="mt-4 flex flex-col">
@@ -133,7 +112,6 @@ export default function CustomerEditForm(props) {
             Job Title
           </label>
           <input id="job" className={`text-gray-700 px-3 border rounded w-[320px] h-10 mt-2 focus:outline-blue-500 border-gray-300`} placeholder="Input Job Title" value={job} onChange={handleChangeJob} />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div className="mt-4 flex flex-col">
@@ -149,9 +127,7 @@ export default function CustomerEditForm(props) {
             className="text-gray-700 w-[320px] h-10 mt-2 focus:outline-blue-500 "
             placeholder="Select Status"
             isClearable
-            // styles={colourStyles}
           />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div>

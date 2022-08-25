@@ -65,41 +65,31 @@ export default function CustomerAddForm(props) {
     }),
   };
 
-  // useEffect(() => {
-  //   if (statusCus === "true") {
-  //     return setStatusCus(true);
-  //   } else {
-  //     return setStatusCus(false);
-  //   }
-  // }, []);
+  const submitAddCustomer = async (event) => {
+    event.preventDefault();
+    hasToken();
 
-  // const submitAddCustomer = async (event) => {
-  //   event.preventDefault();
-  //   hasToken();
+    const result = await axios.post(`${Url}customers`, {
+      name: name,
+      address: address,
+      country: country,
+      phone_number: phone,
+      job_title: job,
+      status: JSON.parse(statusCus),
+    });
 
-  //   const result = await axios.post(`${Url}customers`, {
-  //     name: name,
-  //     address: address,
-  //     country: country,
-  //     phone_number: phone,
-  //     job_title: job,
-  //     status: true,
-  //   });
+    try {
+      if (result.data.success) {
+        router.push("/customerManagement");
+        setSuccess(result.data.message);
+        window.location.reload(true);
+      }
+    } catch (error) {
+      setFailed(error);
 
-  //   console.log(result.data);
-
-  //   try {
-  //     if (result.data.success) {
-  //       router.push("/customerManagement");
-  //       setSuccess(result.data.message);
-  //       window.location.reload(true);
-  //     }
-  //   } catch (error) {
-  //     setFailed(error);
-
-  //     // setEmpty("Please fill the form");
-  //   }
-  // };
+      // setEmpty("Please fill the form");
+    }
+  };
 
   return (
     <>
@@ -157,7 +147,7 @@ export default function CustomerAddForm(props) {
             <button className="border border-indigo-400 bg-white-700 text-sm w-[255px] h-12 rounded-[10px] font-bold text-indigo-700" onClick={props.onClose}>
               Cancel
             </button>
-            <button className="border border-transparent bg-indigo-500 text-sm w-[255px] h-12 rounded-[10px] text-white font-bold" type="submit">
+            <button className="border border-transparent bg-indigo-500 text-sm w-[255px] h-12 rounded-[10px] text-white font-bold" type="submit" onClick={submitAddCustomer}>
               Submit
             </button>
           </div>
