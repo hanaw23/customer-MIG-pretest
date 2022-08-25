@@ -1,12 +1,8 @@
-// import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
 import { axiosLogin } from "../../store/action/login";
-
-// import { Url } from "../../utility/urlApi";
-// import { setUserLocal } from "../../utility/localStorage";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -23,20 +19,6 @@ export default function LoginForm() {
   const handleChangePass = (event) => {
     setPassword(event.target.value);
   };
-
-  // const handleSubmitLogin = async () => {
-  //   const result = await axios.post(`${Url}auth/login`, {
-  //     email: email,
-  //     password: password,
-  //   });
-
-  //   try {
-  //     setUserLocal(result.data.access_token);
-  //     router.push("/customerManagement");
-  //   } catch (error) {
-  //     setError(error);
-  //   }
-  // };
 
   const handleSubmitLogin = (event) => {
     event.preventDefault();
