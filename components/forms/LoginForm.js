@@ -25,7 +25,6 @@ export default function LoginForm() {
       email: email,
       password: password,
     });
-    console.log(result);
 
     try {
       setUserLocal(result.data.access_token);
