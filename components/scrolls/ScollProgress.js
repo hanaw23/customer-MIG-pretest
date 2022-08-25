@@ -19,7 +19,7 @@ export default function ScrollProgress() {
   }, []);
   return (
     <div className="h-[8px] w-screen bg-transparent mt-0 fixed z-40">
-      <div className={`h-[5px] bg-[#251e5d]`} style={{ width: `${scrollTop}%` }}></div>
+      <div className={`h-[5px] bg-[#5a49df]`} style={{ width: `${scrollTop}%` }}></div>
     </div>
   );
 }
