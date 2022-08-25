@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 import AddButton from "../../components/buttons/AddButton";
-import CustomerDrawer from "../../components/drawers/customerDrawer";
+import CustomerDrawer from "../../components/drawers/CustomerDrawer";
 import CustomerTable from "../../components/tables/CustomerTable";
 import ScrollProgress from "../../components/scrolls/ScollProgress";
 import PageHead from "../../components/headers/PageHead";
