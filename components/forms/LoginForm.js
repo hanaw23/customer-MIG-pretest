@@ -1,8 +1,39 @@
+import axios from "axios";
 import { useState } from "react";
+import { useRouter } from "next/router";
+
+import { Url } from "../../utility/urlApi";
+import { setUserLocal } from "../../utility/localStorage";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const router = useRouter();
+
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleChangePass = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleSubmitLogin = async () => {
+    const result = await axios.post(`${Url}auth/login`, {
+      email: email,
+      password: password,
+    });
+    console.log(result);
+
+    try {
+      setUserLocal(result.data.access_token);
+      router.push("/customerManagement");
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   return (
     <div className="h-full bg-gray-white w-[400px] ml-auto mr-auto">
@@ -14,8 +45,8 @@ export default function LoginForm() {
 
               <h3 className="mt-2 text-center text-xl font-semibold text-indigo-400 ">Customer Management</h3>
             </div>
-            <form className="mt-8 space-y-6" action="#" method="POST">
-              {/* {error && <h3 className="text-center font-extrabold text-red-700">{error}</h3>} */}
+            <div className="mt-8 space-y-6">
+              {error && <h3 className="text-center font-semibold text-red-700">{error}</h3>}
               <div className="rounded-md shadow-sm space-y-5">
                 <div className="relative">
                   <input
@@ -24,7 +55,7 @@ export default function LoginForm() {
                     type="email"
                     autoComplete="email"
                     value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+                    onChange={handleChangeEmail}
                     required
                     className="block px-2.5 pb-1 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-indigo-400 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
                     placeholder=" "
@@ -41,10 +72,10 @@ export default function LoginForm() {
                   <input
                     id="password"
                     name="password"
-                    type="pasword"
+                    type="password"
                     autoComplete="current-password"
                     value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+                    onChange={handleChangePass}
                     required
                     className="block px-2.5 pb-1 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-indigo-400 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
                     placeholder=" "
@@ -61,13 +92,13 @@ export default function LoginForm() {
               <div>
                 <button
                   type="submit"
-                  //   onClick={login}
+                  onClick={handleSubmitLogin}
                   className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-m font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Sign in
                 </button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
