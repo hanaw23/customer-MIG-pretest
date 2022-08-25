@@ -1,10 +1,9 @@
 import ReactDOM from "react-dom";
-import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
-import { Url } from "../../utility/urlApi";
-import { hasToken } from "../../utility/localStorage";
+import { axiosDeleteCustomer } from "../../store/action/customer";
 
 import OutsideClickHandler from "react-outside-click-handler";
 import FailedModal from "./FailedModal";
@@ -18,25 +17,10 @@ export default function DeleteModal(props) {
   const customerId = props.customerId;
   const name = props.name;
   const router = useRouter();
+  const dispatch = useDispatch();
 
-  const submitDeletecustomer = async () => {
-    hasToken();
-
-    const result = await axios.delete(`${Url}customers`, {
-      data: {
-        id: customerId,
-      },
-    });
-
-    try {
-      if (result.data.success) {
-        window.location.reload(true);
-        router.push("/customerManagement");
-        setSuccess(result.data.message);
-      }
-    } catch (error) {
-      setFailed(error);
-    }
+  const submitDeletecustomer = () => {
+    dispatch(axiosDeleteCustomer(customerId, router, setSuccess, setFailed));
   };
 
   return ReactDOM.createPortal(

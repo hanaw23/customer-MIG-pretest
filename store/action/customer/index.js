@@ -63,3 +63,24 @@ export const axiosEditCustomer = (customerId, name, address, country, phone, job
     setFailed(error);
   }
 };
+
+export const axiosDeleteCustomer = (customerId, router, setSuccess, setFailed) => async (dispatch) => {
+  hasToken();
+
+  const response = await axios.delete(`${Url}customers`, {
+    data: {
+      id: customerId,
+    },
+  });
+
+  try {
+    if (response.data.success) {
+      router.push("/customerManagement");
+      setSuccess(response.data.message);
+      window.location.reload(true);
+      dispatch(deleteCustomer(response.data.result));
+    }
+  } catch (error) {
+    setFailed(error);
+  }
+};

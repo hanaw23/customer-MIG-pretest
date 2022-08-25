@@ -51,7 +51,7 @@ export default function CustomerEditForm(props) {
     setStatusCus(event.value);
   };
 
-  const submitEditCustomer = async (event) => {
+  const submitEditCustomer = (event) => {
     event.preventDefault();
     dispatch(axiosEditCustomer(customerId, name, address, country, phone, job, statusCus, router, setSuccess, setFailed));
   };
