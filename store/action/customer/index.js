@@ -38,3 +38,28 @@ export const axiosAddCustomer = (name, address, country, phone, job, statusCus, 
     setFailed(error);
   }
 };
+
+export const axiosEditCustomer = (customerId, name, address, country, phone, job, statusCus, router, setSuccess, setFailed) => async (dispatch) => {
+  hasToken();
+
+  const response = await axios.put(`${Url}customers`, {
+    id: customerId,
+    name: name,
+    address: address,
+    country: country,
+    phone_number: phone,
+    job_title: job,
+    status: JSON.parse(statusCus),
+  });
+
+  try {
+    if (response.data.success) {
+      router.push("/customerManagement");
+      setSuccess(response.data.message);
+      window.location.reload(true);
+      dispatch(editCustomer(response.data.result));
+    }
+  } catch (error) {
+    setFailed(error);
+  }
+};
