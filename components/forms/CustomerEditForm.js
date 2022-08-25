@@ -1,5 +1,13 @@
+import axios from "axios";
 import { useState } from "react";
 import Select from "react-select";
+import { useRouter } from "next/router";
+
+import { Url } from "../../utility/urlApi";
+import { hasToken } from "../../utility/localStorage";
+
+import SuccessModal from "../modal/SuccessModal";
+import FailedModal from "../modal/FailedModal";
 
 export default function CustomerEditForm(props) {
   const [name, setName] = useState(props.name);
@@ -8,8 +16,11 @@ export default function CustomerEditForm(props) {
   const [phone, setPhone] = useState(props.phone);
   const [job, setJob] = useState(props.job);
   const [statusCus, setStatusCus] = useState(`${props.status}`);
+  const [success, setSuccess] = useState("");
+  const [failed, setFailed] = useState("");
 
-  // const customerId = props.customerId;
+  const customerId = props.customerId;
+  const router = useRouter();
 
   const status = [
     { value: false, label: "false" },
@@ -52,6 +63,35 @@ export default function CustomerEditForm(props) {
   //       border: empty ? '1px solid red' : null,
   //     }),
   //   };
+
+  const submitEditCustomer = async (event) => {
+    event.preventDefault();
+    hasToken();
+
+    const result = await axios.put(`${Url}customers`, {
+      id: customerId,
+      name: name,
+      address: address,
+      country: country,
+      phone_number: phone,
+      job_title: job,
+      status: JSON.parse(statusCus),
+    });
+
+    // console.log(result.data);
+
+    try {
+      if (result.data.success) {
+        router.push("/customerManagement");
+        setSuccess(result.data.message);
+        window.location.reload(true);
+      }
+    } catch (error) {
+      setFailed(error);
+
+      // setEmpty("Please fill the form");
+    }
+  };
 
   return (
     <>
@@ -116,17 +156,17 @@ export default function CustomerEditForm(props) {
 
         <div>
           <div className="flex gap-8 mt-14 justify-center">
-            <button className="border border-transparent bg-indigo-500 text-sm w-[255px] h-12 rounded-[10px] text-white font-bold" type="submit">
-              Submit
-            </button>
             <button className="border border-indigo-400 bg-white-700 text-sm w-[255px] h-12 rounded-[10px] font-bold text-indigo-700" onClick={props.onClose}>
               Cancel
+            </button>
+            <button className="border border-transparent bg-indigo-500 text-sm w-[255px] h-12 rounded-[10px] text-white font-bold" type="submit" onClick={submitEditCustomer}>
+              Submit
             </button>
           </div>
         </div>
       </div>
-      {/* {success.length !== 0 && <SuccessMessage message={success} actionTitle="Add Product" />}
-      {failed.length !== 0 && <ErrorMessage message={failed} actionTitle="Add Product" />} */}
+      {success.length !== 0 && <SuccessModal message={success} />}
+      {failed.length !== 0 && <FailedModal message={failed} />}
     </>
   );
 }
