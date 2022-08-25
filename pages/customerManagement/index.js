@@ -34,13 +34,16 @@ export default function index() {
       <div>
         <PageHead namePage="Customer Management" />
 
-        <div className=" ml-[80px] mt-8 mx-center">
-          <div className="flex justify-end mr-16"></div>
+        <div className=" ml-[80px] mt-2 mx-center">
+          <div className="flex justify-end mr-12">
+            <AddButton titleButton="+ Add Customer" setOpen={handleOpenAdd} />
+          </div>
 
-          <CustomerTable />
+          <CustomerTable setOpen={handleOpenAdd} />
         </div>
-        {/* <CustomerDrawer isOpen={openAdd} title="Add" onClose={handleCloseAdd} /> */}
       </div>
+
+      {openAdd && <CustomerDrawer isOpen={openAdd} title="Add" onClose={handleCloseAdd} />}
     </div>
   );
 }
