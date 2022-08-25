@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Select from "react-select";
 
-import { hasToken } from "../../utility/localStorage";
-import { Url } from "../../utility/urlApi";
+import { axiosAddCustomer } from "../../store/action/customer";
 
 import FailedModal from "../modal/FailedModal";
 import SuccessModal from "../modal/SuccessModal";
@@ -22,6 +21,7 @@ export default function CustomerAddForm(props) {
   const [failed, setFailed] = useState("");
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const status = [
     { value: false, label: "false" },
@@ -52,35 +52,9 @@ export default function CustomerAddForm(props) {
     setStatusCus(event.value);
   };
 
-  // const colourStyles = {
-  //   control: (base) => ({
-  //     ...base,
-  //     border: empty ? "1px solid red" : null,
-  //   }),
-  // };
-
-  const submitAddCustomer = async (event) => {
+  const submitAddCustomer = (event) => {
     event.preventDefault();
-    hasToken();
-
-    const result = await axios.post(`${Url}customers`, {
-      name: name,
-      address: address,
-      country: country,
-      phone_number: phone,
-      job_title: job,
-      status: JSON.parse(statusCus),
-    });
-
-    try {
-      if (result.data.success) {
-        router.push("/customerManagement");
-        setSuccess(result.data.message);
-        window.location.reload(true);
-      }
-    } catch (error) {
-      setFailed(error);
-    }
+    dispatch(axiosAddCustomer(name, address, country, phone, job, statusCus, router, setSuccess, setFailed));
   };
 
   return (

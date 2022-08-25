@@ -1,10 +1,9 @@
-import axios from "axios";
 import { useState } from "react";
 import Select from "react-select";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
-import { Url } from "../../utility/urlApi";
-import { hasToken } from "../../utility/localStorage";
+import { axiosEditCustomer } from "../../store/action/customer";
 
 import SuccessModal from "../modal/SuccessModal";
 import FailedModal from "../modal/FailedModal";
@@ -21,6 +20,7 @@ export default function CustomerEditForm(props) {
 
   const customerId = props.customerId;
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const status = [
     { value: false, label: "false" },
@@ -51,29 +51,9 @@ export default function CustomerEditForm(props) {
     setStatusCus(event.value);
   };
 
-  const submitEditCustomer = async (event) => {
+  const submitEditCustomer = (event) => {
     event.preventDefault();
-    hasToken();
-
-    const result = await axios.put(`${Url}customers`, {
-      id: customerId,
-      name: name,
-      address: address,
-      country: country,
-      phone_number: phone,
-      job_title: job,
-      status: JSON.parse(statusCus),
-    });
-
-    try {
-      if (result.data.success) {
-        router.push("/customerManagement");
-        setSuccess(result.data.message);
-        window.location.reload(true);
-      }
-    } catch (error) {
-      setFailed(error);
-    }
+    dispatch(axiosEditCustomer(customerId, name, address, country, phone, job, statusCus, router, setSuccess, setFailed));
   };
 
   return (

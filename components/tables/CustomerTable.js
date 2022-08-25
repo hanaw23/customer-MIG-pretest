@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import axios from "axios";
 import DataTable from "react-data-table-component";
+import { useDispatch } from "react-redux";
 
-import { hasToken } from "../../utility/localStorage";
-import { Url } from "../../utility/urlApi";
+import { axiosGetCustomers } from "../../store/action/customer";
 
 import SearchFilter from "../filters/SearchFilter";
 import SpinnerLoading from "../loadings/SpinnerLoading";
@@ -14,6 +14,8 @@ export default function CustomerTable() {
   const [pending, setPending] = useState(true);
   const [query, setQuery] = useState("");
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setPending(false);
@@ -22,13 +24,7 @@ export default function CustomerTable() {
   }, []);
 
   useEffect(() => {
-    hasToken();
-    axios
-      .get(`${Url}customers`)
-      .then((response) => {
-        setCustomers(response.data);
-      })
-      .catch((error) => error);
+    dispatch(axiosGetCustomers(setCustomers));
   }, []);
 
   const handleData = (rowData) => {
