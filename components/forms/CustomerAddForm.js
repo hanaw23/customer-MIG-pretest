@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
-// import axios from "axios";
+import { useState } from "react";
+import axios from "axios";
 import { useRouter } from "next/router";
 import Select from "react-select";
 
-// import { hasToken } from "../../utility/localStorage";
-// import { Url } from "../../utility/urlApi";
+import { hasToken } from "../../utility/localStorage";
+import { Url } from "../../utility/urlApi";
 
-// import FailedModal from "../modal/FailedModal";
-// import SuccessModal from "../modal/SuccessModal";
+import FailedModal from "../modal/FailedModal";
+import SuccessModal from "../modal/SuccessModal";
 
 export default function CustomerAddForm(props) {
   const [name, setName] = useState("");
@@ -17,7 +17,7 @@ export default function CustomerAddForm(props) {
   const [phone, setPhone] = useState("");
   const [job, setJob] = useState("");
   const [statusCus, setStatusCus] = useState("");
-  const [empty, setEmpty] = useState("");
+
   const [success, setSuccess] = useState("");
   const [failed, setFailed] = useState("");
 
@@ -30,40 +30,34 @@ export default function CustomerAddForm(props) {
 
   const handleChangeName = (event) => {
     setName(event.target.value);
-    setEmpty("");
   };
 
   const handleChangeAddress = (event) => {
     setAddress(event.target.value);
-    setEmpty("");
   };
 
   const handleChangeCountry = (event) => {
     setCountry(event.target.value);
-    setEmpty("");
   };
 
   const handleChangePhone = (event) => {
     setPhone(event.target.value);
-    setEmpty("");
   };
 
   const handleChangeJob = (event) => {
     setJob(event.target.value);
-    setEmpty("");
   };
 
   const handleChangeStatus = (event) => {
     setStatusCus(event.value);
-    setEmpty("");
   };
 
-  const colourStyles = {
-    control: (base) => ({
-      ...base,
-      border: empty ? "1px solid red" : null,
-    }),
-  };
+  // const colourStyles = {
+  //   control: (base) => ({
+  //     ...base,
+  //     border: empty ? "1px solid red" : null,
+  //   }),
+  // };
 
   const submitAddCustomer = async (event) => {
     event.preventDefault();
@@ -86,8 +80,6 @@ export default function CustomerAddForm(props) {
       }
     } catch (error) {
       setFailed(error);
-
-      // setEmpty("Please fill the form");
     }
   };
 
@@ -99,7 +91,6 @@ export default function CustomerAddForm(props) {
             Customer Name
           </label>
           <input id="name" className={`text-gray-700 px-3 border rounded w-[320px] h-10 mt-2 focus:outline-blue-500 border-gray-300`} placeholder="Input Customer Name" value={name} onChange={handleChangeName} />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div className="mt-4 flex flex-col">
@@ -107,7 +98,6 @@ export default function CustomerAddForm(props) {
             Customer Address
           </label>
           <input id="address" className={`text-gray-700 px-3 border rounded w-[320px] h-10 mt-2 focus:outline-blue-500 border-gray-300`} placeholder="Input Customer Address" value={address} onChange={handleChangeAddress} />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div className="mt-4 flex flex-col">
@@ -115,7 +105,6 @@ export default function CustomerAddForm(props) {
             Country
           </label>
           <input id="country" className={`text-gray-700 px-3 border rounded w-[320px] h-10 mt-2 focus:outline-blue-500 border-gray-300`} placeholder="Input Customer country" value={country} onChange={handleChangeCountry} />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div className="mt-4 flex flex-col">
@@ -123,7 +112,6 @@ export default function CustomerAddForm(props) {
             Phone Number
           </label>
           <input id="phone" className={`text-gray-700 px-3 border rounded w-[320px] h-10 mt-2 focus:outline-blue-500 border-gray-300`} placeholder="Input Phone Number" value={phone} onChange={handleChangePhone} />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div className="mt-4 flex flex-col">
@@ -131,7 +119,6 @@ export default function CustomerAddForm(props) {
             Job Title
           </label>
           <input id="job" className={`text-gray-700 px-3 border rounded w-[320px] h-10 mt-2 focus:outline-blue-500 border-gray-300`} placeholder="Input Job Title" value={job} onChange={handleChangeJob} />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div className="mt-4 flex flex-col">
@@ -139,7 +126,6 @@ export default function CustomerAddForm(props) {
             Status
           </label>
           <Select id="selectbox" instanceId="selectbox" options={status} onChange={handleChangeStatus} className="text-gray-700 w-[320px] h-10 mt-2 focus:outline-blue-500 " placeholder="Select Status" isClearable />
-          {/* {empty && <p className="text-xs text-red-500 mt-1">{empty}</p>} */}
         </div>
 
         <div>
@@ -153,8 +139,8 @@ export default function CustomerAddForm(props) {
           </div>
         </div>
       </div>
-      {/* {success.length !== 0 && <SuccessModal message={success} />}
-      {failed.length !== 0 && <FailedModal message={failed} />} */}
+      {success.length !== 0 && <SuccessModal message={success} />}
+      {failed.length !== 0 && <FailedModal message={failed} />}
     </>
   );
 }
