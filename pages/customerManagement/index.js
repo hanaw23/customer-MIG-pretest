@@ -23,13 +23,14 @@ export default function index() {
       <ScrollProgress />
 
       <div>
-        <PageHead namePage="Customer Management" setOpen={handleOpenAdd} />
+        <PageHead namePage="Customer Management" />
 
         <div className=" ml-[80px] mt-8 mx-center">
           <div className="flex justify-end mr-16"></div>
+
           <CustomerTable />
         </div>
-        <CustomerDrawer isOpen={openAdd} title="Add" onClose={handleCloseAdd} />
+        {/* <CustomerDrawer isOpen={openAdd} title="Add" onClose={handleCloseAdd} /> */}
       </div>
     </div>
   );

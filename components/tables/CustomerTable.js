@@ -26,7 +26,6 @@ export default function CustomerTable() {
     axios
       .get(`${Url}customers`)
       .then((response) => {
-        console.log(response.data);
         setCustomers(response.data);
       })
       .catch((error) => error);

@@ -25,7 +25,7 @@ export default function CustomerDrawer(props) {
       >
         <article className="relative w-screen max-w-lg p-8 flex flex-col h-full bg-gray-100">
           <div className="flex justify-between">
-            <header className="font-bold text-lg text-left flex">{props.title} Product</header>
+            <header className="font-bold text-lg text-left flex">{props.title} Customer</header>
             {props.showCloseButton ? (
               <div>
                 <button onClick={props.onClose} className="text-lg font-semibold h-2 w-6 ">
