@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import AddButton from "../../components/buttons/AddButton";
 import CustomerDrawer from "../../components/drawers/customerDrawer";
@@ -7,8 +7,17 @@ import CustomerTable from "../../components/tables/CustomerTable";
 import ScrollProgress from "../../components/scrolls/ScollProgress";
 import PageHead from "../../components/headers/PageHead";
 
+import { hasToken } from "../../utility/localStorage";
+import { ProtectedPage } from "../../middleware/ProtectedPage";
+
 export default function index() {
   const [openAdd, setOpenAdd] = useState(false);
+
+  hasToken();
+
+  useEffect(() => {
+    ProtectedPage();
+  }, []);
 
   const handleOpenAdd = () => {
     setOpenAdd(true);
