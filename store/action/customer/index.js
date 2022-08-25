@@ -14,3 +14,27 @@ export const axiosGetCustomers = (setCustomers) => (dispatch) => {
     })
     .catch((error) => error);
 };
+
+export const axiosAddCustomer = (name, address, country, phone, job, statusCus, router, setSuccess, setFailed) => async (dispatch) => {
+  hasToken();
+
+  const response = await axios.post(`${Url}customers`, {
+    name: name,
+    address: address,
+    country: country,
+    phone_number: phone,
+    job_title: job,
+    status: JSON.parse(statusCus),
+  });
+
+  try {
+    if (response.data.success) {
+      router.push("/customerManagement");
+      setSuccess(response.data.message);
+      window.location.reload(true);
+      dispatch(addCustomer(response.data.result));
+    }
+  } catch (error) {
+    setFailed(error);
+  }
+};
