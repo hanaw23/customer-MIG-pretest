@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import EditIcon from "../svg/EditIcon";
-import CustomerDrawer from "../drawers/customerDrawer";
+import CustomerDrawer from "../drawers/CustomerDrawer";
 
 export default function EditButton(props) {
   const [openEdit, setOpenEdit] = useState(false);
